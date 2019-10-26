@@ -19,17 +19,19 @@ export interface TimeInMinutesAndSeconds {
 }
 
 /**
- * Converts time from minutes and seconds to milliseconds
+ * Converts time from minutes and seconds to milliseconds, rounding it to the
+ * nearest whole second (x.5 -> x + 1).
  *
  * @param time The time to convert, expressed in minutes and seconds.
  *
  * @returns The same amount of time, expressed in milliseconds.
  */
 export const to_ms = (time: TimeInMinutesAndSeconds): number =>
-  ((time.minutes || 0) * 60 + (time.seconds || 0)) * 1000;
+  (Math.round((time.minutes || 0) * 60) + Math.round(time.seconds || 0)) * 1000;
 
 /**
- * Converts time from milliseconds to minutes and seconds.
+ * Converts time from milliseconds to minutes and seconds, rounding it to the
+ * nearest whole second (x.5 -> x + 1).
  *
  * @param ms The time to convert, expressed in milliseconds.
  *
