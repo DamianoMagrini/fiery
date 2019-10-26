@@ -9,7 +9,7 @@ import { THEMES, ThemeName } from '../../themes';
 /**
  * Props for {@link ThemeSelectorConnected}.
  *
- * @interface ThemeSelectorProps
+ * @interface ThemeSelectorConnectedProps
  */
 interface ThemeSelectorConnectedProps {
   /**

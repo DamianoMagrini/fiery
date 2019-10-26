@@ -9,7 +9,7 @@ import { ThemeName, THEMES } from '../../themes';
 /**
  * Props for {@link CountDownConnected}.
  *
- * @interface CountDownProps
+ * @interface CountConnectedDownProps
  */
 interface CountDownConnectedProps {
   /**

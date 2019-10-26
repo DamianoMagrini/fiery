@@ -5,6 +5,11 @@ import styles from './Typography.scss';
 
 import { THEME_TUPLE_INDICES } from '../../themes';
 
+/**
+ * Props for {@link Typography}
+ *
+ * @interface TypographyProps
+ */
 interface TypographyProps {
   /**
    * The text content.

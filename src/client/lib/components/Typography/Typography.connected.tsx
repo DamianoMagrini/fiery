@@ -6,6 +6,11 @@ import { AppState } from '../../store';
 import { ThemeName, THEMES } from '../../themes';
 import Typography from './Typography';
 
+/**
+ * Props for {@link TypographyConnected}
+ *
+ * @interface TypographyConnectedProps
+ */
 interface TypographyConnectedProps {
   /**
    * The text content.

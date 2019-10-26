@@ -9,7 +9,7 @@ import { THEMES, ThemeName } from '../../themes';
 /**
  * Props for {@link ButtonConnected}.
  *
- * @interface ButtonProps
+ * @interface ButtonConnectedProps
  */
 interface ButtonConnectedProps {
   /**

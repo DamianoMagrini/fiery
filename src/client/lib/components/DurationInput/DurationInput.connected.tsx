@@ -10,7 +10,7 @@ import { ThemeName, THEMES } from '../../themes';
 /**
  * Props for {@link DurationInputConnected}.
  *
- * @interface DurationInputProps
+ * @interface DurationInputConnectedProps
  */
 interface DurationInputConnectedProps {
   /**
