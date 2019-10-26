@@ -1,0 +1,44 @@
+@import '../theme';
+
+$button-shadow: 0 30px 24px -18px rgba($color-5, 0.25);
+$active-button-shadow: 0 24px 18px -24px rgba($color-5, 0.25);
+
+:local(.container) {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  height: 72px;
+  margin: 36px 48px;
+  width: 240px;
+
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border-radius: 12px;
+  box-shadow: $button-shadow;
+  cursor: pointer;
+  transition: transition(box-shadow, short);
+
+  // Variants
+  &.outlined {
+    background: transparent;
+    border: 2px solid $color-5;
+  }
+  &:not(.outlined) {
+    background: $color-5;
+    border: none;
+  }
+
+  // States
+  &:active {
+    box-shadow: $active-button-shadow;
+  }
+  &.focus-visible {
+    box-shadow: $button-shadow, $focus-shadow;
+
+    &:active {
+      box-shadow: $active-button-shadow, $focus-shadow;
+    }
+  }
+}

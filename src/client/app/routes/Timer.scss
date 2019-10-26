@@ -1,0 +1,19 @@
+@import '../../lib/components/theme';
+
+:local(.wrapper) {
+  text-align: center;
+
+  opacity: 0.1;
+  transition: transition(opacity, 'medium');
+
+  &:hover {
+    opacity: 1;
+  }
+
+  :local(.bottom_icon) {
+    position: fixed;
+
+    bottom: 12px;
+    right: 12px;
+  }
+}

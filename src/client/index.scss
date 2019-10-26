@@ -1,0 +1,57 @@
+@import './fonts';
+@import './lib/components/theme';
+
+* {
+  box-sizing: border-box;
+  outline: none; // Replaced, when and where appropriate, by a box-shadow.
+  user-select: none;
+  vertical-align: top;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+
+  height: 100%;
+  margin: 0;
+  min-height: 100%;
+}
+
+// Prevent images from being draggable.
+img {
+  -webkit-user-drag: none;
+}
+
+#root {
+  display: flex;
+
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+
+  min-height: 100%;
+
+  transition: transition(background, 'short');
+}
+
+#noscript-warning {
+  background: #ffffff;
+
+  span {
+    color: #141414;
+    font-family: $font-stack-primary;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: #060606;
+
+    span {
+      color: #fafafafa;
+    }
+  }
+}

@@ -1,0 +1,13 @@
+@import '../theme';
+
+:local(.separator_mobile) {
+  @media screen and (min-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+:local(.separator_desktop) {
+  @media screen and (max-width: $below-breakpoint-md) {
+    display: none;
+  }
+}

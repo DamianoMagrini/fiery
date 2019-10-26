@@ -1,0 +1,10 @@
+:local(.wrapper) {
+  text-align: center;
+
+  :local(.bottom_icon) {
+    position: fixed;
+
+    bottom: 12px;
+    right: 12px;
+  }
+}

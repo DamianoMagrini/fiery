@@ -1,0 +1,103 @@
+{
+  "private": true,
+
+  "name": "fiery",
+  "version": "1.0.0",
+
+  "description": "Fiery's web app.",
+  "author": "Damiano Magrini <damiano.magrini@gmail.com>",
+
+
+  "browserslist": [
+    "defaults"
+  ],
+
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "moduleFileExtensions": ["js", "ts", "tsx"],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/file.ts",
+      "\\.scss$": "<rootDir>/node_modules/identity-obj-proxy/src/index.js"
+    },
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.test.ts",
+      "**/__tests__/**/*.test.tsx"
+    ],
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "<rootDir>/setup-enzyme.ts"
+    ]
+  },
+
+  "scripts": {
+    "start": "npm run development:serve",
+    "clean": "rimraf build",
+    "test": "jest",
+    "development:serve": "webpack-dev-server --config-name development",
+    "development:dist": "run-s clean development:build",
+    "development:build": "webpack --config-name development",
+    "production:dist": "run-s clean production:build",
+    "production:build": "webpack --config-name production"
+  },
+
+
+  "dependencies": {
+    "preact": "latest",
+    "preact-router": "latest",
+    "react-redux": "latest",
+    "redux": "latest"
+  },
+  
+  "devDependencies": {
+    "@types/copy-webpack-plugin": "latest",
+    "@types/html-webpack-plugin": "latest",
+    "@types/enzyme": "latest",
+    "@types/jest": "latest",
+    "@types/jsdom": "latest",
+    "@types/node": "latest",
+    "@types/optimize-css-assets-webpack-plugin": "latest",
+    "@types/react-redux": "latest",
+    "@types/webpack": "latest",
+    "@types/webpack-dev-server": "latest",
+
+    "autoprefixer": "latest",
+    "@babel/core": "latest",
+    "@babel/preset-env": "latest",
+    "@babel/plugin-transform-react-inline-elements": "latest",
+    "babel-loader": "latest",
+    "copy-webpack-plugin": "latest",
+    "css-loader": "latest",
+    "html-webpack-plugin": "latest",
+    "extract-css-chunks-webpack-plugin": "latest",
+    "file-loader": "latest",
+    "node-sass": "latest",
+    "optimize-css-assets-webpack-plugin": "latest",
+    "postcss-loader": "latest",
+    "sass": "latest",
+    "sass-loader": "latest",
+    "style-loader": "latest",
+    "ts-loader": "latest",
+    "webpack": "latest",
+    "webpack-cli": "latest",
+    "webpack-dev-server": "latest",
+
+    "jest": "latest",
+    "jsdom": "latest",
+    "enzyme": "latest",
+    "enzyme-adapter-preact-pure": "latest",
+    "identity-obj-proxy": "latest",
+    "ts-jest": "latest",
+
+    "npm-run-all": "latest",
+    "rimraf": "latest",
+    "ts-node": "latest",
+    "typescript": "latest"
+  }
+}

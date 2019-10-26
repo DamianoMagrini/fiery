@@ -1,0 +1,23 @@
+@import '../theme';
+
+:local(.container) {
+  display: inline-block;
+  overflow: hidden;
+
+  border-radius: 50%;
+  height: 36px;
+  margin: 12px;
+  padding: 0;
+  width: 36px;
+
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transition(box-shadow, 'short');
+
+  &.focus-visible {
+    box-shadow: $focus-shadow;
+  }
+}

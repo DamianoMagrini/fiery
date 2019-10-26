@@ -1,0 +1,41 @@
+//! IMPORTANT: DO NOT DEFINE STYLES HERE
+
+$color-1: #fe5100;
+$color-2: #fe6c00;
+$color-3: #fe9200;
+$color-4: #feb300;
+$color-5: #feda00;
+
+@function transition($property, $duration) {
+  @if ($duration == 'short') {
+    @return $property 150ms ease-out;
+  }
+  @if ($duration == 'medium') {
+    @return $property 200ms ease-in-out;
+  }
+}
+
+$focus-shadow: 0 0 0 2px $color-4;
+
+/*
+  Font fallbacks courtesy of Chris Coyier – blatantly copied from CSS-Tricks
+  (https://css-tricks.com/snippets/css/font-stacks/)
+*/
+$font-stack-primary: 'Montserrat', Frutiger, 'Frutiger Linotype', Univers,
+  Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad,
+  'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva,
+  'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-stack-mono: 'Roboto Mono', Consolas, 'Andale Mono WT', 'Andale Mono',
+  'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono',
+  'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco,
+  'Courier New', Courier, monospace;
+
+$breakpoint-xs: 0px;
+$below-breakpoint-sm: 599px;
+$breakpoint-sm: 600px;
+$below-breakpoint-md: 959px;
+$breakpoint-md: 960px;
+$below-breakpoint-lg: 1279px;
+$breakpoint-lg: 1280px;
+$below-breakpoint-xl: 1919px;
+$breakpoint-xl: 1920px;

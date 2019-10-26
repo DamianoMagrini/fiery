@@ -1,0 +1,28 @@
+@import '../theme';
+
+:local(.container) {
+  display: inline-block;
+
+  height: 64px;
+  margin: 12px;
+  width: 64px;
+
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transition(box-shadow, short);
+
+  &:local(.selected) {
+    box-shadow: 0 0 0 4px $color-3;
+
+    &.focus-visible {
+      box-shadow: $focus-shadow, 0 0 0 4px $color-3;
+    }
+  }
+
+  &.focus-visible {
+    box-shadow: $focus-shadow;
+  }
+}

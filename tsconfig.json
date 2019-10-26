@@ -1,0 +1,19 @@
+{
+  "include": ["./**/*.ts", "./**/*.tsx"],
+  "exclude": ["./src/**/*"],
+
+  "compilerOptions": {
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "paths": {
+      "*": ["@types/*"]
+    },
+    "typeRoots": ["node_modules/@types", "@types"]
+  }
+}
