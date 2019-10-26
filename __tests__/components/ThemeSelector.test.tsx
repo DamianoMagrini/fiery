@@ -2,23 +2,23 @@ import { h } from 'preact';
 import { ReactElement } from 'react';
 import { mount } from 'enzyme';
 
-import ThemeSelector from '../../src/client/lib/components/ThemeSelector';
+import { ThemeSelector } from '../../src/client/lib/components/ThemeSelector';
 import ThemeSelectorOption from '../../src/client/lib/components/ThemeSelector/ThemeSelectorOption';
-
-import { ThemeName, THEMES } from '../../src/client/lib/themes';
 
 describe('ThemeSelector', () => {
   // Data and functions for testing
-  const default_theme: ThemeName = 'LIGHT';
+  const THEMES: {
+    [theme_name: string]: [string, string, string];
+  } = {
+    LIGHT: ['#ffffff', '#ffffff', '#000000'],
+    DARK: ['#000000', '#000000', '#ffffff']
+  };
 
-  const themes_number = Object.keys(THEMES).length;
+  const DEFAULT_THEME: keyof typeof THEMES = 'LIGHT';
 
   const other_theme_index = 0;
 
-  let interact_count = 0,
-    change_count = 0;
-
-  const on_interact = () => interact_count++;
+  let change_count = 0;
   const on_change = () => change_count++;
 
   // Utility functions
@@ -33,7 +33,12 @@ describe('ThemeSelector', () => {
 
   // Component initialization
   const theme_selector = mount((
-    <ThemeSelector label={'Test'} default_theme={default_theme} />
+    <ThemeSelector
+      label={'Test'}
+      themes={THEMES}
+      default_theme={DEFAULT_THEME}
+      on_update={on_change}
+    />
   ) as ReactElement);
 
   // Tests
@@ -43,7 +48,7 @@ describe('ThemeSelector', () => {
       themes.
     */
     expect(theme_selector.find(ThemeSelectorOption).children().length).toBe(
-      themes_number
+      Object.keys(THEMES).length // The number of themes.
     );
   });
 
@@ -54,7 +59,7 @@ describe('ThemeSelector', () => {
         `selected` attribute set to `true`, and `false` otherwise.
       */
       expect(wrapper.props().selected).toBe(
-        Object.keys(THEMES)[index] === default_theme
+        Object.keys(THEMES)[index] === DEFAULT_THEME
       );
     });
   });
@@ -71,30 +76,17 @@ describe('ThemeSelector', () => {
     });
   });
 
-  it('runs the appropriate callbacks', () => {
+  it('runs the callback properly', () => {
     // Reset selected option and counters.
     click_option(0);
-    interact_count = change_count = 0;
+    change_count = 0;
 
-    /*
-      Click the selected option, and expect:
-      - the interact count to have increased;
-      - the change count to have stayed the same.
-    */
-
+    // Click the selected option, and expect the change count to still be 0.
     click_option(0);
-
-    expect(interact_count).toBe(1);
     expect(change_count).toBe(0);
 
-    /*
-      Click the other option, and expect:
-      - the interact count to have increased;
-      - the change count to have increased as well.
-    */
+    // Click the other option, and expect the change count to have increased.
     click_option(1);
-
-    expect(interact_count).toBe(2);
     expect(change_count).toBe(1);
   });
 });

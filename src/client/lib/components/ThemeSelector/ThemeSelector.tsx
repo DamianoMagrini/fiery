@@ -4,29 +4,34 @@ import { useState } from 'preact/hooks';
 import ThemeSelectorOption from './ThemeSelectorOption';
 import Typography from '../Typography';
 
-import { THEMES, ThemeName, THEME_TUPLE_INDICES } from '../../themes';
-import { store } from '../../store';
-import { set_theme } from '../../store/actions';
+import { THEME_TUPLE_INDICES } from '../../themes';
 
 /**
  * Props for {@link ThemeSelector}.
  *
  * @interface ThemeSelectorProps
  */
-interface ThemeSelectorProps {
+interface ThemeSelectorProps<ThemeNames extends string> {
   /**
    * The label to show above the selector
    *
    * @memberof ThemeSelectorProps
    */
   label: string;
+  themes: { [theme_name in ThemeNames]: [string, string, string] };
   /**
    * The index of the initially selected theme, presumably from local/session
    * storage or the user's preferred theme.
    *
    * @memberof ThemeSelectorProps
    */
-  default_theme: ThemeName;
+  default_theme: ThemeNames;
+  /**
+   * Function to run whenever a new theme is selected.
+   *
+   * @memberof ThemeSelectorProps
+   */
+  on_update: (new_theme: ThemeNames) => void;
 }
 
 /**
@@ -34,7 +39,12 @@ interface ThemeSelectorProps {
  * that it does not contain the logic to change the app's theme, but will run
  * the specified callbacks instead.
  */
-const ThemeSelector = ({ label, default_theme }: ThemeSelectorProps) => {
+const ThemeSelector = <ThemeNames extends string>({
+  label,
+  themes,
+  default_theme,
+  on_update
+}: ThemeSelectorProps<ThemeNames>) => {
   const [theme, set_theme_internal] = useState(default_theme);
 
   /**
@@ -43,10 +53,10 @@ const ThemeSelector = ({ label, default_theme }: ThemeSelectorProps) => {
    *
    * @param new_theme The newly selected theme.
    */
-  const update_theme = (new_theme: ThemeName) => {
+  const update_theme = (new_theme: ThemeNames) => {
     if (theme !== new_theme) {
       set_theme_internal(new_theme);
-      store.dispatch(set_theme(new_theme));
+      on_update(new_theme);
     }
   };
 
@@ -54,10 +64,10 @@ const ThemeSelector = ({ label, default_theme }: ThemeSelectorProps) => {
     <div>
       <Typography variant={'paragraph'}>{label}</Typography>
 
-      {Object.keys(THEMES).map((theme_name: ThemeName) => (
+      {Object.keys(themes).map((theme_name: ThemeNames) => (
         <ThemeSelectorOption
           selected={theme_name === theme}
-          color={THEMES[theme_name][THEME_TUPLE_INDICES.PRIMARY]}
+          color={themes[theme_name][THEME_TUPLE_INDICES.PRIMARY]}
           on_click={() => update_theme(theme_name)}
         />
       ))}
