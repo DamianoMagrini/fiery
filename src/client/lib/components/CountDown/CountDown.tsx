@@ -1,6 +1,6 @@
-import { h, Component } from 'preact';
+import { Component, h } from 'preact';
 
-import Typography from '../Typography';
+import Typography from '../Typography/Typography';
 
 import { from_ms, pad } from '../../time';
 
@@ -18,8 +18,16 @@ interface CountDownProps {
   duration: number;
   /**
    * The function to call when the countdown has ended.
+   *
+   * @memberof ButtonProps
    */
   on_complete?(): void;
+  /**
+   * The component's theme.
+   *
+   * @memberof ButtonProps
+   */
+  theme: [string, string, string];
 }
 
 /**
@@ -43,18 +51,14 @@ class CountDown extends Component<CountDownProps> {
    * @memberof CountDown
    */
   private tick = () => {
-    console.log('Tick tock!');
-
-    console.log(this.state);
-
     if (this.state.time_remaining <= 1000) {
       this.props.on_complete();
       clearInterval(this.interval_id);
     } else {
       /*
         Note that this does not depend on the previous `state.time_remaining`
-        value, as it is possible that the function will not be run exactly every
-        1000 ms. Therefore, every time the remaining time is updated,
+        value, as it is possible that the function will not be run exactly
+        every 1000 ms. Therefore, every time the remaining time is updated,
         `Date.now()` is called, to make up for any inaccuracy.
       */
       this.setState(() => ({
@@ -63,11 +67,13 @@ class CountDown extends Component<CountDownProps> {
     }
   };
 
+  // TODO resolve conflicts with @types/node (when testing with Jest).
+  // @ts-ignore
   componentWillMount = () => (this.interval_id = setInterval(this.tick, 1_000));
   componentWillUnmount = () => clearInterval(this.interval_id);
 
   render = () => (
-    <Typography variant={'hero'}>
+    <Typography variant={'hero'} theme={this.props.theme}>
       {pad(from_ms(this.state.time_remaining).minutes)}:
       {pad(from_ms(this.state.time_remaining).seconds)}
     </Typography>

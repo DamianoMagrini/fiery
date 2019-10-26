@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { useState } from 'preact/hooks';
 
 import ThemeSelectorOption from './ThemeSelectorOption';
-import Typography from '../Typography';
+import Typography from '../Typography/Typography';
 
 import { THEME_TUPLE_INDICES } from '../../themes';
 
@@ -62,7 +62,9 @@ const ThemeSelector = <ThemeNames extends string>({
 
   return (
     <div>
-      <Typography variant={'paragraph'}>{label}</Typography>
+      <Typography variant={'paragraph'} theme={themes[theme]}>
+        {label}
+      </Typography>
 
       {Object.keys(themes).map((theme_name: ThemeNames) => (
         <ThemeSelectorOption

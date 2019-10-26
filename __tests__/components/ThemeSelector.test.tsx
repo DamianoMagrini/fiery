@@ -2,17 +2,13 @@ import { h } from 'preact';
 import { ReactElement } from 'react';
 import { mount } from 'enzyme';
 
-import { ThemeSelector } from '../../src/client/lib/components/ThemeSelector';
+import ThemeSelector from '../../src/client/lib/components/ThemeSelector/ThemeSelector';
 import ThemeSelectorOption from '../../src/client/lib/components/ThemeSelector/ThemeSelectorOption';
+
+import { THEMES } from '../test_data';
 
 describe('ThemeSelector', () => {
   // Data and functions for testing
-  const THEMES: {
-    [theme_name: string]: [string, string, string];
-  } = {
-    LIGHT: ['#ffffff', '#ffffff', '#000000'],
-    DARK: ['#000000', '#000000', '#ffffff']
-  };
 
   const DEFAULT_THEME: keyof typeof THEMES = 'LIGHT';
 

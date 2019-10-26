@@ -1,6 +1,6 @@
-export { default as Button } from './Button';
-export { default as CountDown } from './CountDown';
-export { default as DurationInput } from './DurationInput';
+export { ButtonConnected as Button } from './Button';
+export { CountDownConnected as CountDown } from './CountDown';
+export { DurationInputConnected as DurationInput } from './DurationInput';
 export { ThemeSelectorConnected as ThemeSelector } from './ThemeSelector';
-export { default as Typography } from './Typography';
+export { TypographyConnected as Typography } from './Typography';
 export { default as VerticalSeparator } from './VerticalSeparator';

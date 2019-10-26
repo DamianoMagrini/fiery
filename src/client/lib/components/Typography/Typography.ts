@@ -1,12 +1,9 @@
-import { h, ComponentChildren, FunctionalComponent } from 'preact';
-import { useSelector } from 'react-redux';
+import { ComponentChildren, FunctionalComponent, h } from 'preact';
 
-import styles from './Typography.scss';
 import clsx from '../../clsx';
+import styles from './Typography.scss';
 
-import { AppState } from '../../store';
-
-import { ThemeName, THEMES, THEME_TUPLE_INDICES } from '../../themes';
+import { THEME_TUPLE_INDICES } from '../../themes';
 
 interface TypographyProps {
   /**
@@ -28,11 +25,11 @@ interface TypographyProps {
    */
   inline?: boolean;
   /**
-   * Hex color override.
+   * The component's theme.
    *
    * @memberof TypographyProps
    */
-  color?: string;
+  theme: [string, string, string];
 }
 
 /**
@@ -52,7 +49,7 @@ const Typography: FunctionalComponent<TypographyProps> = ({
   children,
   variant,
   inline,
-  color
+  theme
 }) =>
   h(
     MAP_VARIANT_TO_ELEMENT[variant],
@@ -60,11 +57,7 @@ const Typography: FunctionalComponent<TypographyProps> = ({
       class: clsx(styles.text, `variant_${variant}`),
       style: {
         ...(inline && { display: 'inline-block' }),
-        color:
-          color ||
-          THEMES[useSelector<AppState, ThemeName>((state) => state.theme)][
-            THEME_TUPLE_INDICES.TEXT
-          ]
+        color: theme[THEME_TUPLE_INDICES.TEXT]
       }
     },
     children

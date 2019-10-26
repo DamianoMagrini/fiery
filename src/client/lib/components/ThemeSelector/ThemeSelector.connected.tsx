@@ -7,7 +7,7 @@ import { set_theme } from '../../store/actions';
 import { THEMES, ThemeName } from '../../themes';
 
 /**
- * Props for {@link ThemeSelector}.
+ * Props for {@link ThemeSelectorConnected}.
  *
  * @interface ThemeSelectorProps
  */

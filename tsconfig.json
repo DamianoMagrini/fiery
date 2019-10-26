@@ -3,14 +3,17 @@
   "exclude": ["./src/**/*"],
 
   "compilerOptions": {
+    "target": "es2020",
+    "moduleResolution": "node",
+
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "esModuleInterop": true,
     "jsx": "react",
     "jsxFactory": "h",
-    "moduleResolution": "node",
     "noImplicitAny": true,
+
     "paths": {
       "*": ["@types/*"]
     },

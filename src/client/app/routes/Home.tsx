@@ -7,25 +7,25 @@ import {
   Button,
   DurationInput,
   ThemeSelector,
-  Typography,
   VerticalSeparator
 } from '../../lib/components';
 
-import { AppState, store } from '../../lib/store';
-import { ThemeName, THEMES, THEME_TUPLE_INDICES } from '../../lib/themes';
+// The state-indipendent Typography component.
+import { Typography } from '../../lib/components/Typography';
 
-import { set_timer } from '../../lib/store/actions';
+import { AppState } from '../../lib/store';
+import { ThemeName, THEMES } from '../../lib/themes';
+
 import { route } from 'preact-router';
 
 import { enter_fullscreen } from '../../lib/fullscreen';
 
 const Home: FunctionalComponent = () => {
-  const duration = useSelector<AppState, number>((state) => state.duration);
   const theme = useSelector<AppState, ThemeName>((state) => state.theme);
 
   return (
     <div class={styles.wrapper}>
-      <img src={'/images/branding/logo.svg'} alt='Fiery' />
+      <img src={'/images/branding/logo.svg'} alt={'Fiery'} />
 
       <VerticalSeparator dekstop_height={96} mobile_height={72} />
 
@@ -46,9 +46,7 @@ const Home: FunctionalComponent = () => {
       </Button>
 
       <div class={styles.footer}>
-        <Typography
-          color={THEMES.LIGHT[THEME_TUPLE_INDICES.TEXT]}
-          variant={'caption'}>
+        <Typography theme={THEMES.LIGHT} variant={'caption'}>
           Made with <span style={{ fontFamily: '' }}>❤</span> by Damiano Magrini
         </Typography>
       </div>

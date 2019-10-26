@@ -2,15 +2,13 @@
   "private": true,
 
   "name": "fiery",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "description": "Fiery's web app.",
   "author": "Damiano Magrini <damiano.magrini@gmail.com>",
 
 
-  "browserslist": [
-    "defaults"
-  ],
+  "browserslist": ["defaults"],
 
   "jest": {
     "globals": {
@@ -30,7 +28,6 @@
       "**/__tests__/**/*.test.ts",
       "**/__tests__/**/*.test.tsx"
     ],
-    "testEnvironment": "node",
     "setupFilesAfterEnv": [
       "<rootDir>/setup-enzyme.ts"
     ]

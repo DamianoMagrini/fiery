@@ -3,9 +3,9 @@ import { FunctionalComponent, h } from 'preact';
 import styles from './Button.scss';
 import clsx from '../../clsx';
 
-import Typography from '../Typography';
+import Typography from '../Typography/Typography';
 
-import { THEMES, THEME_TUPLE_INDICES } from '../../themes';
+import { THEMES } from '../../themes';
 
 /**
  * Props for {@link Button}.
@@ -31,6 +31,12 @@ interface ButtonProps {
    * @memberof ButtonProps
    */
   variant?: 'outlined' | 'filled';
+  /**
+   * The component's theme.
+   *
+   * @memberof ButtonProps
+   */
+  theme: [string, string, string];
 }
 
 /**
@@ -40,14 +46,13 @@ interface ButtonProps {
 const Button: FunctionalComponent<ButtonProps> = ({
   children,
   on_click,
-  variant
+  variant,
+  theme
 }) => {
   const outlined = variant === 'outlined';
   return (
     <button class={clsx(styles.container, { outlined })} onClick={on_click}>
-      <Typography
-        color={outlined ? null : THEMES.LIGHT[THEME_TUPLE_INDICES.TEXT]}
-        variant={'button'}>
+      <Typography variant={'button'} theme={outlined ? theme : THEMES.LIGHT}>
         {children}
       </Typography>
     </button>

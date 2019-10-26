@@ -2,7 +2,9 @@ import { h } from 'preact';
 import { ReactElement } from 'react';
 import { mount } from 'enzyme';
 
-import Button from '../../src/client/lib/components/Button';
+import Button from '../../src/client/lib/components/Button/Button';
+
+import { THEMES } from '../test_data';
 
 describe('Button', () => {
   // Data and functions for testing
@@ -15,7 +17,9 @@ describe('Button', () => {
 
   // Component initialization
   const button = mount((
-    <Button on_click={click_handler}>{label_text}</Button>
+    <Button on_click={click_handler} theme={THEMES.LIGHT}>
+      {label_text}
+    </Button>
   ) as ReactElement);
 
   // Tests

@@ -1,15 +1,15 @@
-import { createRef, h } from 'preact';
+import { h } from 'preact';
 import { ReactElement } from 'react';
 import { mount } from 'enzyme';
 
-import CountDown from '../../src/client/lib/components/CountDown';
+import CountDown from '../../src/client/lib/components/CountDown/CountDown';
 
-import { to_ms, from_ms } from '../../src/client/lib/time';
+import { to_ms } from '../../src/client/lib/time';
+
+import { THEMES } from '../test_data';
 
 describe('CountDown', () => {
   // Data and functions for testing
-  const countdown_ref = createRef<CountDown>();
-
   const duration = to_ms({ seconds: 4 });
 
   let completed = false;
@@ -20,14 +20,25 @@ describe('CountDown', () => {
   // Component and ref initialization
   const countdown = mount((
     <CountDown
-      ref={countdown_ref}
       duration={duration}
       on_complete={on_complete}
+      theme={THEMES.LIGHT}
     />
   ) as ReactElement);
 
   // Tests
   it('displays the correct initial time', () => {
-    expect(countdown_ref.current.time_remaining).toBe(duration);
+    expect(
+      countdown
+        .childAt(0)
+        .childAt(0)
+        .text()
+    ).toBe('00:04');
+  });
+
+  it('runs the callback upon completion', () => {
+    setTimeout(() => {
+      expect(completed).toBe(true);
+    }, to_ms({ seconds: 4 }));
   });
 });
