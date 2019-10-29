@@ -1,15 +1,12 @@
 import { ExtensibleEvent } from '../extensible-event';
 
+import { CACHE_NAME } from '../constants';
+
 /**
- * Generates the function to be run when the service worker's `fetch` event
- * fires.
- *
- * @returns The `fetch` event handler, which adds the specified URLs to the
- *   service worker's cache.
+ * The `fetch` event handler, which adds the specified URLs to the service
+ * worker's cache.
  */
-const generate_fetch_event = (CACHE_NAME: string) => (
-  event: ExtensibleEvent
-) => {
+const handle_fetch = (event: ExtensibleEvent): void => {
   event.respondWith(
     caches.open(CACHE_NAME).then((cache) =>
       cache.match(event.request).then((response) => {
@@ -56,4 +53,4 @@ const generate_fetch_event = (CACHE_NAME: string) => (
   );
 };
 
-export default generate_fetch_event;
+export default handle_fetch;

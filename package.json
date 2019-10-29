@@ -37,6 +37,9 @@
     "start": "npm run development:serve",
     "clean": "rimraf build",
     "test": "jest",
+    "lint": "run-p lint:*",
+    "lint:ts": "tsc --project src/tsconfig.json --noEmit --skipLibCheck",
+    "lint:eslint": "eslint src/**/*.{ts,tsx}",
     "development:serve": "webpack-dev-server --config-name development",
     "development:dist": "run-s clean development:build",
     "development:build": "webpack --config-name development",
@@ -51,7 +54,7 @@
     "react-redux": "latest",
     "redux": "latest"
   },
-  
+
   "devDependencies": {
     "@types/copy-webpack-plugin": "latest",
     "@types/html-webpack-plugin": "latest",
@@ -91,6 +94,14 @@
     "enzyme-adapter-preact-pure": "latest",
     "identity-obj-proxy": "latest",
     "ts-jest": "latest",
+
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
+    "eslint-plugin-react": "latest",
+    "prettier": "latest",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
 
     "npm-run-all": "latest",
     "rimraf": "latest",

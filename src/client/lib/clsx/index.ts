@@ -1,6 +1,7 @@
 /**
  * An array of class values.
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ClassArray extends Array<ClassValue> {}
 
 /**
@@ -8,7 +9,7 @@ interface ClassArray extends Array<ClassValue> {}
  * equivalent is whether or not the class name will be included.
  */
 interface ClassDictionary {
-  [class_name: string]: any;
+  [class_name: string]: string | number | boolean | null | undefined;
 }
 
 /**
@@ -40,7 +41,7 @@ type ClassValue =
  *
  * @returns The class name as a string.
  */
-const to_value = (class_value: ClassValue) => {
+const to_value = (class_value: ClassValue): string => {
   let class_name = '';
 
   if (class_value) {
@@ -52,7 +53,7 @@ const to_value = (class_value: ClassValue) => {
             class_name += temporary_value;
         }
       } else {
-        for (let key in class_value) {
+        for (const key in class_value) {
           const temporary_value = to_value(key);
           if (class_value[key] && temporary_value)
             class_name += temporary_value;

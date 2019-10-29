@@ -1,0 +1,61 @@
+---
+env:
+  browser: true
+  es6: true
+
+overrides:
+  - files:
+      - src/service-worker/**/*
+    env:
+      serviceworker: true
+  - files:
+      - __tests__/**/*
+      - __mocks__/**/*
+    env:
+      jest: true
+
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/eslint-recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:@typescript-eslint/recommended-requiring-type-checking
+  - plugin:react/recommended
+  - prettier
+
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 2020
+  sourceType: module
+  project: src/tsconfig.json
+
+settings:
+  react:
+    pragma: h
+
+plugins:
+  - react
+  - prettier
+  - '@typescript-eslint'
+
+rules:
+  '@typescript-eslint/semi': error
+  '@typescript-eslint/camelcase': 'off'
+  '@typescript-eslint/no-unused-vars':
+    - warn
+    - argsIgnorePattern: '^_'
+  '@typescript-eslint/require-await': 'off'
+  prettier/prettier: error
+  react/display-name: 'off'
+  react/no-deprecated: 'off'
+  react/no-unescaped-entities: 'off'
+  react/no-unknown-property:
+    - warn
+    - ignore:
+        - class
+  react/prop-types: 'off'

@@ -1,26 +1,28 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
+// ts-ignore is required for compatibility across browsers here.
+
 /**
  * Enter fullscreen mode.
  */
-export const enter_fullscreen = () => {
-  const document_element = document.documentElement;
+export const enter_fullscreen = (): void => {
+  const element = document.documentElement;
 
-  if ('requestFullscreen' in document_element)
-    document_element.requestFullscreen();
-  else if ('mozRequestFullScreen' in document_element)
+  if ('requestFullscreen' in element) element.requestFullscreen();
+  else if ('mozRequestFullScreen' in element)
     // @ts-ignore
-    document_element.mozRequestFullScreen();
-  else if ('webkitRequestFullscreen' in document_element)
+    element.mozRequestFullScreen();
+  else if ('webkitRequestFullscreen' in element)
     // @ts-ignore
-    document_element.webkitRequestFullscreen();
-  else if ('msRequestFullscreen' in document_element)
+    element.webkitRequestFullscreen();
+  else if ('msRequestFullscreen' in element)
     // @ts-ignore
-    document_element.msRequestFullscreen();
+    element.msRequestFullscreen();
 };
 
 /**
  * Exit fullscreen mode.
  */
-export const exit_fullscreen = () => {
+export const exit_fullscreen = (): void => {
   if ('exitFullscreen' in document) document.exitFullscreen();
   else if ('mozExitFullScreen' in document)
     // @ts-ignore

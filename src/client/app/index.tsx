@@ -9,7 +9,7 @@ import { store, AppState } from '../lib/store';
 
 import { ThemeName, THEME_TUPLE_INDICES, THEMES } from '../lib/themes';
 
-const RootStyle = () => (
+const RootStyle: FunctionalComponent = () => (
   <style>{`#root {background: ${
     THEMES[useSelector<AppState, ThemeName>((state) => state.theme)][
       THEME_TUPLE_INDICES.BACKGROUND

@@ -27,7 +27,9 @@ const DurationInputConnected: FunctionalComponent<
   <DurationInput
     label={label}
     theme={THEMES[useSelector<AppState, ThemeName>((state) => state.theme)]}
-    update_duration={(new_duration) => store.dispatch(set_timer(new_duration))}
+    update_duration={(new_duration): void => {
+      store.dispatch(set_timer(new_duration));
+    }}
     initial_duration={useSelector<AppState, number>((state) => state.duration)}
   />
 );

@@ -1,4 +1,4 @@
-import { h } from 'preact';
+import { FunctionalComponent, h } from 'preact';
 
 import ThemeSelector from './ThemeSelector';
 
@@ -32,15 +32,16 @@ interface ThemeSelectorConnectedProps {
  * that it does not contain the logic to change the app's theme, but will run
  * the specified callbacks instead.
  */
-const ThemeSelectorConnected = ({
-  label,
-  default_theme
-}: ThemeSelectorConnectedProps) => (
+const ThemeSelectorConnected: FunctionalComponent<
+  ThemeSelectorConnectedProps
+> = ({ label, default_theme }) => (
   <ThemeSelector
     label={label}
     themes={THEMES}
     default_theme={default_theme}
-    on_update={(new_theme) => store.dispatch(set_theme(new_theme))}
+    on_update={(new_theme): void => {
+      store.dispatch(set_theme(new_theme));
+    }}
   />
 );
 

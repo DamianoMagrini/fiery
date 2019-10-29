@@ -29,7 +29,8 @@ export const load_state = (): Partial<AppState> | undefined => {
   }
 };
 
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+// @ts-ignore For debugging purposes.
 window.flush_state = (): boolean => {
   try {
     storage.removeItem(STATE_ITEM_KEY);

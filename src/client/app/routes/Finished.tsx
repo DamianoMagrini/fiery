@@ -12,7 +12,12 @@ const Finished: FunctionalComponent = () => (
     <VerticalSeparator height={12} />
     <Typography variant={'paragraph'}>You managed to stay focused</Typography>
 
-    <Button on_click={() => route('/')}>finish</Button>
+    <Button
+      on_click={(): void => {
+        route('/');
+      }}>
+      finish
+    </Button>
 
     <img
       class={styles.bottom_icon}

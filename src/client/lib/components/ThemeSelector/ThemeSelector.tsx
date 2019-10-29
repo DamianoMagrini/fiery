@@ -31,7 +31,7 @@ interface ThemeSelectorProps<ThemeNames extends string> {
    *
    * @memberof ThemeSelectorProps
    */
-  on_update: (new_theme: ThemeNames) => void;
+  on_update(new_theme: ThemeNames): void;
 }
 
 /**
@@ -44,7 +44,7 @@ const ThemeSelector = <ThemeNames extends string>({
   themes,
   default_theme,
   on_update
-}: ThemeSelectorProps<ThemeNames>) => {
+}: ThemeSelectorProps<ThemeNames>): h.JSX.Element => {
   const [theme, set_theme_internal] = useState(default_theme);
 
   /**
@@ -53,7 +53,7 @@ const ThemeSelector = <ThemeNames extends string>({
    *
    * @param new_theme The newly selected theme.
    */
-  const update_theme = (new_theme: ThemeNames) => {
+  const update_theme = (new_theme: ThemeNames): void => {
     if (theme !== new_theme) {
       set_theme_internal(new_theme);
       on_update(new_theme);
@@ -68,9 +68,10 @@ const ThemeSelector = <ThemeNames extends string>({
 
       {Object.keys(themes).map((theme_name: ThemeNames) => (
         <ThemeSelectorOption
+          key={theme_name}
           selected={theme_name === theme}
           color={themes[theme_name][THEME_TUPLE_INDICES.PRIMARY]}
-          on_click={() => update_theme(theme_name)}
+          on_click={(): void => update_theme(theme_name)}
         />
       ))}
     </div>

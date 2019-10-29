@@ -55,7 +55,7 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
 }) => {
   const [duration, set_duration_internal] = useState(from_ms(initial_duration));
 
-  const set_duration = (new_duration: TimeInMinutesAndSeconds) => {
+  const set_duration = (new_duration: TimeInMinutesAndSeconds): void => {
     if (
       new_duration.minutes !== duration.minutes ||
       new_duration.seconds !== duration.seconds
@@ -74,7 +74,7 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
    */
   const handle_key_down = (property: 'minutes' | 'seconds') => (
     event: KeyboardEvent
-  ) => {
+  ): void => {
     const target = event.target as HTMLInputElement;
     const { value } = target;
 
@@ -224,7 +224,7 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
       <DurationInputIconButton
         label={'Remove five minutes from the timer'}
         icon={'minus'}
-        on_click={() => {
+        on_click={(): void => {
           const { minutes, seconds } = duration;
           if (minutes > 5) set_duration({ minutes: minutes - 5, seconds });
           else set_duration({ minutes: 0, seconds });
@@ -233,7 +233,7 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
       <DurationInputIconButton
         label={'Add five minutes to the timer'}
         icon={'plus'}
-        on_click={() => {
+        on_click={(): void => {
           const { minutes, seconds } = duration;
           if (minutes < 94) set_duration({ minutes: minutes + 5, seconds });
           else set_duration({ minutes: 99, seconds });
