@@ -1,4 +1,4 @@
-import './index.d';
+/// <reference path="index.d.ts" />
 
 import { h, render } from 'preact';
 

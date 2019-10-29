@@ -1,4 +1,4 @@
-import './webpack.config.d';
+/// <reference path="webpack.config.d.ts" />
 
 import fs from 'fs';
 import path from 'path';

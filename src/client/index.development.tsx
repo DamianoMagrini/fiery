@@ -1,4 +1,5 @@
-import './index.d';
+/// <reference path="index.d.ts" />
+
 import 'preact/debug';
 
 import { h, render } from 'preact';
