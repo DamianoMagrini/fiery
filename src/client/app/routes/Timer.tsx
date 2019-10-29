@@ -2,7 +2,8 @@ import { createRef, FunctionalComponent, h } from 'preact';
 
 import styles from './Timer.scss';
 
-import { Button, CountDown } from '../../lib/components';
+import { Button, CountDown as CountDownConnected } from '../../lib/components';
+import { CountDown } from '../../lib/components/CountDown';
 import { useSelector } from 'react-redux';
 import { AppState, store } from '../../lib/store';
 
@@ -19,7 +20,7 @@ const Timer: FunctionalComponent = () => {
 
   return (
     <div class={styles.wrapper}>
-      <CountDown
+      <CountDownConnected
         ref={count_down_ref}
         duration={duration}
         on_complete={() => {
