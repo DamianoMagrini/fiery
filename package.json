@@ -39,7 +39,7 @@
     "test": "jest",
     "lint": "run-p lint:*",
     "lint:ts": "tsc --project src/tsconfig.json --noEmit --skipLibCheck",
-    "lint:eslint": "eslint src/**/*.{ts,tsx} --fix",
+    "lint:eslint": "eslint src/**/*.{ts,tsx}",
     "development:serve": "webpack-dev-server --config-name development",
     "development:dist": "run-s clean development:build",
     "development:build": "webpack --config-name development",
