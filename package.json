@@ -89,7 +89,6 @@
     "webpack-dev-server": "latest",
 
     "jest": "latest",
-    "jsdom": "latest",
     "enzyme": "latest",
     "enzyme-adapter-preact-pure": "latest",
     "identity-obj-proxy": "latest",
