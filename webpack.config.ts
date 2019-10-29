@@ -8,70 +8,12 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 
-import { Configuration, Module, Plugin } from 'webpack';
+import { Configuration, Plugin } from 'webpack';
 
 /**
  * Either of the two modes that can be used while building the app.
  */
 type Mode = 'development' | 'production';
-
-/**
- * A function that generates the `module` property of Webpack's
- * `Configuration`, based on the provided build mode.
- *
- * @param mode The build mode.
- */
-const generate_module = (mode: Mode): Module => ({
-  rules: [
-    {
-      test: /\.tsx?$/,
-      use: [
-        {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-            ...(mode === 'production'
-              ? { plugins: ['@babel/plugin-transform-react-inline-elements'] }
-              : {})
-          }
-        },
-        {
-          loader: 'ts-loader',
-          options: {
-            configFile: path.resolve(__dirname, 'src', 'tsconfig.json')
-          }
-        }
-      ]
-    },
-    {
-      test: /\.scss$/,
-      use: [
-        {
-          loader: ExtractCssChunks.loader,
-          options: {
-            hot: true
-          }
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            modules: {
-              mode: 'global',
-              localIdentName: '[hash]',
-              context: path.resolve(__dirname, 'src')
-            }
-          }
-        },
-        'postcss-loader',
-        'sass-loader'
-      ]
-    },
-    {
-      test: /\.svg$/,
-      use: 'file-loader'
-    }
-  ]
-});
 
 /**
  * A function that generates the `plugins` property of Webpack's
@@ -141,7 +83,48 @@ const generate_config = (mode: Mode): Configuration => ({
       : {})
   },
 
-  module: generate_module(mode),
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              configFile: path.resolve(__dirname, 'src', 'tsconfig.json')
+            }
+          }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: ExtractCssChunks.loader,
+            options: {
+              hot: true
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'global',
+                localIdentName: '[hash]',
+                context: path.resolve(__dirname, 'src')
+              }
+            }
+          },
+          'postcss-loader',
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.svg$/,
+        use: 'file-loader'
+      }
+    ]
+  },
   plugins: generate_plugins(mode),
 
   output: {

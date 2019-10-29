@@ -68,10 +68,6 @@
     "@types/webpack-dev-server": "latest",
 
     "autoprefixer": "latest",
-    "@babel/core": "latest",
-    "@babel/preset-env": "latest",
-    "@babel/plugin-transform-react-inline-elements": "latest",
-    "babel-loader": "latest",
     "copy-webpack-plugin": "latest",
     "css-loader": "latest",
     "html-webpack-plugin": "latest",
