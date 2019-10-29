@@ -50,7 +50,7 @@ class CountDown extends Component<CountDownProps> {
    *
    * @memberof CountDown
    */
-  private tick = () => {
+  private tick = (): void => {
     if (this.state.time_remaining <= 1000) {
       this.props.on_complete();
       clearInterval(this.interval_id);
@@ -67,17 +67,22 @@ class CountDown extends Component<CountDownProps> {
     }
   };
 
-  // TODO resolve conflicts with @types/node (when testing with Jest).
-  // @ts-ignore
-  componentWillMount = () => (this.interval_id = setInterval(this.tick, 1_000));
-  componentWillUnmount = () => clearInterval(this.interval_id);
+  componentWillMount(): void {
+    // Using `window.setInterval` to disambiguate.
+    this.interval_id = window.setInterval(this.tick, 1_000);
+  }
+  componentWillUnmount(): void {
+    clearInterval(this.interval_id);
+  }
 
-  render = () => (
-    <Typography variant={'hero'} theme={this.props.theme}>
-      {pad(from_ms(this.state.time_remaining).minutes)}:
-      {pad(from_ms(this.state.time_remaining).seconds)}
-    </Typography>
-  );
+  render(): h.JSX.Element {
+    return (
+      <Typography variant={'hero'} theme={this.props.theme}>
+        {pad(from_ms(this.state.time_remaining).minutes)}:
+        {pad(from_ms(this.state.time_remaining).seconds)}
+      </Typography>
+    );
+  }
 
   /**
    * The remaining time.

@@ -23,7 +23,7 @@ const Timer: FunctionalComponent = () => {
       <CountDownConnected
         ref={count_down_ref}
         duration={duration}
-        on_complete={() => {
+        on_complete={(): void => {
           exit_fullscreen();
           store.dispatch(set_timer(to_ms({ minutes: 30 })));
           route('/finished');
@@ -31,7 +31,7 @@ const Timer: FunctionalComponent = () => {
       />
 
       <Button
-        on_click={() => {
+        on_click={(): void => {
           exit_fullscreen();
           store.dispatch(set_timer(count_down_ref.current.time_remaining));
           route('/given-up');

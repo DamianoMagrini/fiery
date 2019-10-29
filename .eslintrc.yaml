@@ -46,7 +46,13 @@ plugins:
 rules:
   '@typescript-eslint/semi': error
   '@typescript-eslint/camelcase': 'off'
+  '@typescript-eslint/no-unused-vars':
+    - warn
+    - argsIgnorePattern: '^_'
+  '@typescript-eslint/require-await': 'off'
   prettier/prettier: error
+  react/display-name: 'off'
+  react/no-deprecated: 'off'
   react/no-unescaped-entities: 'off'
   react/no-unknown-property:
     - warn

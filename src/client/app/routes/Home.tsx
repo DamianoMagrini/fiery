@@ -38,7 +38,7 @@ const Home: FunctionalComponent = () => {
       <VerticalSeparator dekstop_height={96} mobile_height={72} />
 
       <Button
-        on_click={() => {
+        on_click={(): void => {
           enter_fullscreen();
           route('/timer');
         }}>

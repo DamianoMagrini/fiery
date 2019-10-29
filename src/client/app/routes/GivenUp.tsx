@@ -25,7 +25,7 @@ const GivenUp: FunctionalComponent = () => {
 
       <Button
         variant={'outlined'}
-        on_click={() => {
+        on_click={(): void => {
           store.dispatch(set_timer(to_ms({ minutes: 30 })));
           route('/');
         }}>

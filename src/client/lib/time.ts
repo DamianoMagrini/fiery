@@ -50,5 +50,5 @@ export const from_ms = (ms: number): TimeInMinutesAndSeconds => ({
  * @param [length=2] The desired maximum length.
  * @returns {string}
  */
-export const pad = (time: number, length: number = 2): string =>
+export const pad = (time: number, length = 2): string =>
   time.toString().padStart(length, '0');
