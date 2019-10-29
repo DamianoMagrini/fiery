@@ -21,7 +21,7 @@ type Mode = 'development' | 'production';
  *
  * @param mode The build mode.
  */
-const module = (mode: Mode): Module => ({
+const generate_module = (mode: Mode): Module => ({
   rules: [
     {
       test: /\.tsx?$/,
@@ -79,7 +79,7 @@ const module = (mode: Mode): Module => ({
  *
  * @param mode The build mode.
  */
-const plugins = (mode: Mode): Plugin[] => [
+const generate_plugins = (mode: Mode): Plugin[] => [
   new CopyWebpackPlugin([
     {
       from: path.resolve(__dirname, 'src', 'client', 'resources'),
@@ -141,8 +141,8 @@ const generate_config = (mode: Mode): Configuration => ({
       : {})
   },
 
-  module: module(mode),
-  plugins: plugins(mode),
+  module: generate_module(mode),
+  plugins: generate_plugins(mode),
 
   output: {
     path: path.resolve(__dirname, 'build'),
