@@ -35,6 +35,7 @@
 
   "scripts": {
     "start": "npm run development:serve",
+    "build": "npm run production:dist",
     "clean": "rimraf build",
     "test": "jest",
     "lint": "run-p lint:*",
