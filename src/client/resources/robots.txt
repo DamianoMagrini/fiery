@@ -1,0 +1,7 @@
+Sitemap: https://fiery.netlify.com/sitemap.xml
+User-Agent: *
+Disallow:
+Allow: /
+Disallow: /timer
+Disallow: /finished
+Disallow: /given-up
