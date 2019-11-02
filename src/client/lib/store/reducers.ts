@@ -24,9 +24,7 @@ export const theme_reducer: Reducer<
   Action<typeof SET_THEME> & { theme: ThemeName }
 > = (
   theme = load_state().theme ||
-  matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'DARK'
-    : 'LIGHT',
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'DARK' : 'LIGHT'),
   action
 ) => {
   let new_theme: ThemeName;
