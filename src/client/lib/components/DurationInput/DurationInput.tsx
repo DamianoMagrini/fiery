@@ -60,8 +60,8 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
       new_duration.minutes !== duration.minutes ||
       new_duration.seconds !== duration.seconds
     ) {
-      set_duration_internal(duration);
-      update_duration(to_ms(duration));
+      set_duration_internal(new_duration);
+      update_duration(to_ms(new_duration));
     }
   };
 
