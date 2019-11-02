@@ -87,32 +87,32 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
 
     if (NUMBER_KEYS.includes(event.key)) {
       /*
-      PSEUDOCODE TO CLARIFY WHAT HAPPENS BELOW
+        PSEUDOCODE TO CLARIFY WHAT HAPPENS BELOW
 
-      IF the selection is two characters long,
-        THEN insert the number and append a 0 before it;
-
-
-      ELSE, IF the selection is one character long,
-        THEN don't do anything (one character will be replaced with one
-          character, so the length will stay the same);
+        IF the selection is two characters long,
+          THEN insert the number and append a 0 before it;
 
 
-      ELSE, IF no character is selected,
-        - IF the cursor is at the last position (2),
-          - IF the last character is a 0,
-            - IF the typed character is not a 0,
-                THEN replace the last character with the typed one;
+        ELSE, IF the selection is one character long,
+          THEN don't do anything (one character will be replaced with one
+            character, so the length will stay the same);
+
+
+        ELSE, IF no character is selected,
+          - IF the cursor is at the last position (2),
+            - IF the last character is a 0,
+              - IF the typed character is not a 0,
+                  THEN replace the last character with the typed one;
+              - ELSE,
+                  THEN set the value to 0;
             - ELSE,
-                THEN set the value to 0;
-          - ELSE,
-              THEN shift the number to the left, and insert the typed character
-              on the right;
+                THEN shift the number to the left, and insert the typed
+                character on the right;
 
-        - ELSE,
-            THEN replace the next character with the typed one and advance the
-            cursor;
-    */
+          - ELSE,
+              THEN replace the next character with the typed one and advance
+              the cursor;
+      */
       switch (selection_length) {
         case 2:
           target.value = `0${event.key}`;
@@ -227,7 +227,7 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
         on_click={(): void => {
           const { minutes, seconds } = duration;
           if (minutes > 5) set_duration({ minutes: minutes - 5, seconds });
-          else set_duration({ minutes: 0, seconds });
+          else set_duration({ minutes: 1, seconds });
         }}
       />
       <DurationInputIconButton
