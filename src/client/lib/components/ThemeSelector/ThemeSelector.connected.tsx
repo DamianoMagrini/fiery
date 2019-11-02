@@ -1,10 +1,11 @@
 import { FunctionalComponent, h } from 'preact';
+import { useSelector } from 'react-redux';
 
 import ThemeSelector from './ThemeSelector';
 
-import { store } from '../../store';
+import { store, AppState } from '../../store';
 import { set_theme } from '../../store/actions';
-import { THEMES, ThemeName } from '../../themes';
+import { ThemeName, THEMES } from '../../themes';
 
 /**
  * Props for {@link ThemeSelectorConnected}.
@@ -18,13 +19,6 @@ interface ThemeSelectorConnectedProps {
    * @memberof ThemeSelectorProps
    */
   label: string;
-  /**
-   * The index of the initially selected theme, presumably from local/session
-   * storage or the user's preferred theme.
-   *
-   * @memberof ThemeSelectorProps
-   */
-  default_theme: ThemeName;
 }
 
 /**
@@ -34,11 +28,11 @@ interface ThemeSelectorConnectedProps {
  */
 const ThemeSelectorConnected: FunctionalComponent<
   ThemeSelectorConnectedProps
-> = ({ label, default_theme }) => (
+> = ({ label }) => (
   <ThemeSelector
     label={label}
     themes={THEMES}
-    default_theme={default_theme}
+    default_theme={useSelector<AppState, ThemeName>((state) => state.theme)}
     on_update={(new_theme): void => {
       store.dispatch(set_theme(new_theme));
     }}
