@@ -13,7 +13,7 @@ import {
 // The state-indipendent Typography component.
 import { Typography } from '../../lib/components/Typography';
 
-import { AppState } from '../../lib/store';
+import { AppState, store } from '../../lib/store';
 import { ThemeName, THEMES } from '../../lib/themes';
 
 import { route } from 'preact-router';
@@ -39,6 +39,9 @@ const Home: FunctionalComponent = () => {
 
       <Button
         on_click={(): void => {
+          gtag('event', 'timer_started', {
+            duration: store.getState().duration
+          });
           enter_fullscreen();
           route('/timer');
         }}>
