@@ -1,0 +1,18 @@
+#noscript-warning {
+  background: #ffffff;
+}
+#noscript-warning span {
+  color: #141414;
+  font-family: 'Montserrat', Frutiger, 'Frutiger Linotype', Univers, Calibri,
+    'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad, 'DejaVu Sans Condensed',
+    'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, 'Helvetica Neue',
+    Helvetica, Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  #noscript-warning {
+    background: #060606;
+  }
+  span {
+    color: #fafafafa;
+  }
+}

@@ -38,20 +38,3 @@ img {
 
   transition: transition(background, 'short');
 }
-
-#noscript-warning {
-  background: #ffffff;
-
-  span {
-    color: #141414;
-    font-family: $font-stack-primary;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    background: #060606;
-
-    span {
-      color: #fafafafa;
-    }
-  }
-}
