@@ -1,4 +1,4 @@
-import { FunctionalComponent, h } from 'preact';
+import { FunctionalComponent, h, Ref } from 'preact';
 import { useSelector } from 'react-redux';
 
 import CountDown from './CountDown';
@@ -20,8 +20,15 @@ interface CountDownConnectedProps {
   duration: number;
   /**
    * The function to call when the countdown has ended.
+   *
+   * @memberof CountDownConnectedProps
    */
   on_complete?(): void;
+  /**
+   * The `ref` to be passed in to the wrapped `CountDown` component.
+   * @memberof CountDownConnectedProps
+   */
+  countdown_ref: Ref<CountDown>;
 }
 
 /**
@@ -29,12 +36,14 @@ interface CountDownConnectedProps {
  */
 const CountDownConnected: FunctionalComponent<CountDownConnectedProps> = ({
   duration,
-  on_complete
+  on_complete,
+  countdown_ref
 }) => (
   <CountDown
     duration={duration}
     on_complete={on_complete}
     theme={THEMES[useSelector<AppState, ThemeName>((state) => state.theme)]}
+    ref={countdown_ref}
   />
 );
 

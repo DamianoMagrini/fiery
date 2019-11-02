@@ -16,12 +16,12 @@ import { to_ms } from '../../lib/time';
 const Timer: FunctionalComponent = () => {
   const duration = useSelector<AppState, number>((state) => state.duration);
 
-  const count_down_ref = createRef<CountDown>();
+  const countdown_ref = createRef<CountDown>();
 
   return (
     <div class={styles.wrapper}>
       <CountDownConnected
-        ref={count_down_ref}
+        countdown_ref={countdown_ref}
         duration={duration}
         on_complete={(): void => {
           exit_fullscreen();
@@ -33,7 +33,7 @@ const Timer: FunctionalComponent = () => {
       <Button
         on_click={(): void => {
           exit_fullscreen();
-          store.dispatch(set_timer(count_down_ref.current.time_remaining));
+          store.dispatch(set_timer(countdown_ref.current.time_remaining));
           route('/given-up');
         }}
         variant={'outlined'}>
