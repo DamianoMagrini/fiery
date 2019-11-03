@@ -78,12 +78,14 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
     const target = event.target as HTMLInputElement;
     const { value } = target;
 
-    const selection_start = target.selectionStart;
-    const selection_length = target.selectionEnd - target.selectionStart;
+    const {
+      selectionStart: selection_start,
+      selectionEnd: selection_end
+    } = target;
+    const selection_length = selection_end - selection_start;
 
     event.stopImmediatePropagation();
-    let should_prevent_default = true;
-    if (IGNORED_KEYS.includes(event.key)) should_prevent_default = false;
+    if (!IGNORED_KEYS.includes(event.key)) event.preventDefault();
 
     if (NUMBER_KEYS.includes(event.key)) {
       /*
@@ -94,8 +96,7 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
 
 
         ELSE, IF the selection is one character long,
-          THEN don't do anything (one character will be replaced with one
-            character, so the length will stay the same);
+          THEN emulate the default action;
 
 
         ELSE, IF no character is selected,
@@ -119,8 +120,9 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
           target.selectionStart = 2;
           break;
         case 1:
-          // Don't do anything.
-          should_prevent_default = false;
+          if (selection_start === 0) target.value = event.key + target.value[1];
+          else target.value = target.value[0] + event.key;
+          target.selectionStart = target.selectionEnd = selection_end;
           break;
         case 0:
           if (selection_start === 2) {
@@ -146,8 +148,9 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
           target.selectionStart = 2;
           break;
         case 1:
-          // Don't do anything.
-          should_prevent_default = false;
+          if (selection_start === 0) target.value = `0${target.value[1]}`;
+          else target.value = `${target.value[0]}0`;
+          target.selectionStart = target.selectionEnd = selection_start;
           break;
         case 0:
           switch (selection_start) {
@@ -164,8 +167,6 @@ const DurationInput: FunctionalComponent<DurationInputProps> = ({
           break;
       }
     }
-
-    if (should_prevent_default) event.preventDefault();
 
     // If the seconds value is more than 59, set it back to the limit.
     if (property === 'seconds' && Number(target.value) > 59)
