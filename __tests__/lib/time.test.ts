@@ -38,6 +38,10 @@ describe('from_ms', () => {
       minutes: 1,
       seconds: 26
     });
+    expect(from_ms(539999)).toMatchObject<TimeInMinutesAndSeconds>({
+      minutes: 9,
+      seconds: 0
+    }); // Rather than 8:60.
   });
 
   it('rounds down correctly', () => {

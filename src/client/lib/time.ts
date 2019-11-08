@@ -37,10 +37,13 @@ export const to_ms = (time: TimeInMinutesAndSeconds): number =>
  *
  * @returns The same amount of time, expressed in minutes and seconds.
  */
-export const from_ms = (ms: number): TimeInMinutesAndSeconds => ({
-  minutes: Math.floor(ms / 60_000),
-  seconds: Math.round(Math.floor(ms % 60_000) / 1_000)
-});
+export const from_ms = (ms: number): TimeInMinutesAndSeconds => {
+  const seconds = Math.round(ms / 1_000);
+  return {
+    minutes: Math.floor(seconds / 60),
+    seconds: Math.floor(seconds % 60)
+  };
+};
 
 /**
  * Add zeros to the start of a length of time until the desired length (which
