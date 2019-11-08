@@ -1,5 +1,7 @@
 /// <reference path="webpack.config.d.ts" />
 
+import { version } from './package.json';
+
 import fs from 'fs';
 import path from 'path';
 
@@ -8,7 +10,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 
-import { Configuration, Plugin } from 'webpack';
+import { Configuration, DefinePlugin, Plugin } from 'webpack';
 
 /**
  * Either of the two modes that can be used while building the app.
@@ -22,6 +24,9 @@ type Mode = 'development' | 'production';
  * @param mode The build mode.
  */
 const generate_plugins = (mode: Mode): Plugin[] => [
+  new DefinePlugin({
+    __VERSION__: JSON.stringify(version)
+  }),
   new CopyWebpackPlugin([
     {
       from: path.resolve(__dirname, 'src', 'client', 'resources'),
@@ -36,8 +41,8 @@ const generate_plugins = (mode: Mode): Plugin[] => [
     }
   }),
   new ExtractCssChunks({
-    filename: '[name].css',
-    chunkFilename: '[id].css'
+    filename: `[name].v${version}.bundle.css`,
+    chunkFilename: '[contenthash].bundle.css'
   }),
   ...(mode === 'production'
     ? [
@@ -129,7 +134,7 @@ const generate_config = (mode: Mode): Configuration => ({
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].bundle.js',
+    filename: `[name].v${version}.bundle.js`,
     chunkFilename: '[contenthash].bundle.js',
     publicPath: '/'
   },

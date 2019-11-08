@@ -1,3 +1,4 @@
+/// <reference path="../webpack-constants.d.ts" />
 /// <reference path="index.d.ts" />
 
 import { h, render } from 'preact';
@@ -16,7 +17,7 @@ render(<App />, document.getElementById('root'));
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
-      .register('/service_worker.bundle.js')
+      .register(`/service_worker.v${__VERSION__}.bundle.js`)
       .then((_registration) => {})
       .catch((_error) => {});
   });

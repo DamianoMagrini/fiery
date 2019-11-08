@@ -17,37 +17,40 @@ const handle_fetch = (event: ExtensibleEvent): void => {
 
         // Otherwise, if the user is offline, return the index.
         if (!navigator.onLine) {
-          return cache.match('/');
+          return cache.match('/index.html');
         }
 
         /*
           Finally, if no other condition is true, just fetch the resource and
           cache it.
         */
-        return fetch(event.request)
-          .then((response) => {
-            // If the response is not valid, return without caching it.
-            if (
-              !response ||
-              response.status !== 200 ||
-              response.type !== 'basic'
-            ) {
-              return response;
-            }
+        return (
+          fetch(event.request)
+            .then((response) => {
+              // If the response is not valid, return without caching it.
+              if (
+                !response ||
+                response.status !== 200 ||
+                response.type !== 'basic'
+              ) {
+                return response;
+              }
 
-            /*
+              /*
               Clone the response to not interfere with scripts that may need to
               use it.
             */
-            const cloned_response = response.clone();
+              const cloned_response = response.clone();
 
-            // Add the cloned response to the cache, at its url.
-            cache.put(event.request, cloned_response);
+              // Add the cloned response to the cache, at its url.
+              cache.put(event.request, cloned_response);
 
-            // Return the original response.
-            return response;
-          })
-          .catch(() => cache.match('/'));
+              // Return the original response.
+              return response;
+            })
+            // If the fetch failed, fall back again to returning the index.
+            .catch(() => cache.match('/index.html'))
+        );
       })
     )
   );
