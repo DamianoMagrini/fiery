@@ -2,7 +2,7 @@
  * An array of class values.
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface ClassArray extends Array<ClassValue> {}
+type ClassArray = Array<ClassValue>;
 
 /**
  * A dictionary of classes, where keys are class names and the values' boolean
