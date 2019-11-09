@@ -15,3 +15,4 @@ const FIREBASE_CONFIG = {
 
 export const app = firebase.initializeApp(FIREBASE_CONFIG);
 export const analytics = app.analytics();
+export const performance = app.performance();
