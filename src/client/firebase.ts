@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/analytics';
+import 'firebase/performance';
 
 const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyDnzitIMJVHjnoYbOKKE4Abm4NFeSRHlsA',
