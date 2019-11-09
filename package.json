@@ -50,6 +50,7 @@
 
 
   "dependencies": {
+    "firebase": "latest",
     "preact": "latest",
     "preact-router": "latest",
     "react-redux": "latest",

@@ -1,3 +1,4 @@
+import { analytics } from '../../firebase';
 import { FunctionalComponent, h } from 'preact';
 
 import styles from './Home.scss';
@@ -35,9 +36,9 @@ const Home: FunctionalComponent = () => (
 
     <Button
       on_click={(): void => {
-        // gtag('event', 'timer_started', {
-        //   duration: store.getState().duration
-        // });
+        analytics.logEvent('timer_started', {
+          duration: store.getState().duration
+        });
         enter_fullscreen();
         route('/timer');
       }}>
