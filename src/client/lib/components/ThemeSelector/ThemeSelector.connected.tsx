@@ -1,3 +1,5 @@
+import { analytics } from '../../../firebase';
+
 import { FunctionalComponent, h } from 'preact';
 import { useSelector } from 'react-redux';
 
@@ -35,6 +37,7 @@ const ThemeSelectorConnected: FunctionalComponent<
     default_theme={useSelector<AppState, ThemeName>((state) => state.theme)}
     on_update={(new_theme): void => {
       store.dispatch(set_theme(new_theme));
+      analytics.setUserProperties({ theme: new_theme });
     }}
   />
 );

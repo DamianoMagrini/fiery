@@ -25,7 +25,8 @@ type Mode = 'development' | 'production';
  */
 const generate_plugins = (mode: Mode): Plugin[] => [
   new DefinePlugin({
-    __VERSION__: JSON.stringify(version)
+    __VERSION__: JSON.stringify(version),
+    __DEBUG__: JSON.stringify(mode !== 'production')
   }),
   new CopyWebpackPlugin([
     {
@@ -75,7 +76,7 @@ const generate_config = (mode: Mode): Configuration => ({
   target: 'web',
 
   entry: {
-    main: path.resolve(__dirname, 'src', 'client', `index.${mode}.tsx`),
+    main: path.resolve(__dirname, 'src', 'client', 'index.tsx'),
     ...(mode === 'production'
       ? {
           service_worker: path.resolve(
