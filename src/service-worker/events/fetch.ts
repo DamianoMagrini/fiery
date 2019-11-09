@@ -37,9 +37,9 @@ const handle_fetch = (event: ExtensibleEvent): void => {
               }
 
               /*
-              Clone the response to not interfere with scripts that may need to
-              use it.
-            */
+                Clone the response to not interfere with scripts that may need to
+                use it.
+              */
               const cloned_response = response.clone();
 
               // Add the cloned response to the cache, at its url.

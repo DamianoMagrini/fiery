@@ -15,7 +15,7 @@ const handle_activate = (event: ExtensibleEvent): void => {
       Promise.all(
         cache_names.map((cache_name) => {
           // If the cache is not whitelisted, delete it.
-          if (cache_whitelist.includes(cache_name))
+          if (!cache_whitelist.includes(cache_name))
             return caches.delete(cache_name);
           return undefined;
         })
