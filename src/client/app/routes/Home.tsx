@@ -35,9 +35,9 @@ const Home: FunctionalComponent = () => (
 
     <Button
       on_click={(): void => {
-        gtag('event', 'timer_started', {
-          duration: store.getState().duration
-        });
+        // gtag('event', 'timer_started', {
+        //   duration: store.getState().duration
+        // });
         enter_fullscreen();
         route('/timer');
       }}>

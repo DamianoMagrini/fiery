@@ -24,7 +24,7 @@ const Timer: FunctionalComponent = () => {
         countdown_ref={countdown_ref}
         duration={duration}
         on_complete={(): void => {
-          gtag('event', 'timer_completed', { duration });
+          // gtag('event', 'timer_completed', { duration });
           exit_fullscreen();
           store.dispatch(set_timer(to_ms({ minutes: 30 })));
           route('/finished');
@@ -34,7 +34,7 @@ const Timer: FunctionalComponent = () => {
       <Button
         on_click={(): void => {
           const { time_remaining } = countdown_ref.current;
-          gtag('event', 'timer_canceled', { time_remaining, duration });
+          // gtag('event', 'timer_canceled', { time_remaining, duration });
           exit_fullscreen();
           store.dispatch(set_timer(time_remaining));
           route('/given-up');
