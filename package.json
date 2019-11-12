@@ -52,9 +52,7 @@
   "dependencies": {
     "firebase": "latest",
     "preact": "latest",
-    "preact-router": "latest",
-    "react-redux": "latest",
-    "redux": "latest"
+    "preact-router": "latest"
   },
 
   "devDependencies": {
@@ -65,7 +63,6 @@
     "@types/jsdom": "latest",
     "@types/node": "latest",
     "@types/optimize-css-assets-webpack-plugin": "latest",
-    "@types/react-redux": "latest",
     "@types/webpack": "latest",
     "@types/webpack-dev-server": "latest",
 
