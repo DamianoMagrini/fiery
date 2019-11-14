@@ -1,19 +1,17 @@
 import { FunctionalComponent, h } from 'preact';
-import { useSelector } from 'react-redux';
+import { useContext } from 'preact/hooks';
 
 import styles from './GivenUp.scss';
 
 import { Button, Typography, VerticalSeparator } from '../../lib/components';
 
-import { AppState, store } from '../../lib/store';
-
-import { set_timer } from '../../lib/store/actions';
-import { route } from 'preact-router';
+import { DurationContext, set_duration } from '../../lib/state';
 
 import { from_ms, to_ms } from '../../lib/time';
+import { route } from 'preact-router';
 
 const GivenUp: FunctionalComponent = () => {
-  const duration = useSelector<AppState, number>((state) => state.duration);
+  const [duration, dispatch_duration] = useContext(DurationContext);
 
   return (
     <div class={styles.wrapper}>
@@ -26,7 +24,7 @@ const GivenUp: FunctionalComponent = () => {
       <Button
         variant={'outlined'}
         on_click={(): void => {
-          store.dispatch(set_timer(to_ms({ minutes: 30 })));
+          dispatch_duration(set_duration(to_ms({ minutes: 30 })));
           route('/');
         }}>
         close

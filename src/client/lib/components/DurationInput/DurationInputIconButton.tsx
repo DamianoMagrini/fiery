@@ -1,12 +1,11 @@
 import { FunctionalComponent, h } from 'preact';
-import { useSelector } from 'react-redux';
+import { useContext } from 'preact/hooks';
 
 import * as icons from './icons';
 
 import styles from './DurationInputIconButton.scss';
 
-import { AppState } from '../../store';
-import { ThemeName } from '../../themes';
+import { ThemeContext } from '../../state';
 
 interface DurationInputIconButtonProps {
   label: string;
@@ -14,16 +13,14 @@ interface DurationInputIconButtonProps {
   on_click(): void;
 }
 
-const DurationInputIconButton: FunctionalComponent<
-  DurationInputIconButtonProps
-> = ({ label, icon, on_click }) => {
-  const theme = useSelector<AppState, ThemeName>((store) => store.theme);
-
-  return (
-    <button class={styles.container} aria-label={label} onClick={on_click}>
-      <img src={icons[theme][icon]} alt={''} />
-    </button>
-  );
-};
+const DurationInputIconButton: FunctionalComponent<DurationInputIconButtonProps> = ({
+  label,
+  icon,
+  on_click
+}) => (
+  <button class={styles.container} aria-label={label} onClick={on_click}>
+    <img src={icons[useContext(ThemeContext)[0]][icon]} alt={''} />
+  </button>
+);
 
 export default DurationInputIconButton;

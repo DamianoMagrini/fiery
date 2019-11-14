@@ -9,8 +9,7 @@ import { THEMES } from '../test_data';
 
 describe('ThemeSelector', () => {
   // Data and functions for testing
-
-  const DEFAULT_THEME: keyof typeof THEMES = 'LIGHT';
+  const DEFAULT_THEME_NAME: keyof typeof THEMES = 'LIGHT';
 
   const other_theme_index = 0;
 
@@ -28,14 +27,16 @@ describe('ThemeSelector', () => {
   };
 
   // Component initialization
-  const theme_selector = mount((
-    <ThemeSelector
-      label={'Test'}
-      themes={THEMES}
-      default_theme={DEFAULT_THEME}
-      on_update={on_change}
-    />
-  ) as ReactElement);
+  const theme_selector = mount(
+    (
+      <ThemeSelector
+        label={'Test'}
+        themes={THEMES}
+        default_theme_name={DEFAULT_THEME_NAME}
+        on_update={on_change}
+      />
+    ) as ReactElement
+  );
 
   // Tests
   it('has the correct number of options', () => {
@@ -55,7 +56,7 @@ describe('ThemeSelector', () => {
         `selected` attribute set to `true`, and `false` otherwise.
       */
       expect(wrapper.props().selected).toBe(
-        Object.keys(THEMES)[index] === DEFAULT_THEME
+        Object.keys(THEMES)[index] === DEFAULT_THEME_NAME
       );
     });
   });

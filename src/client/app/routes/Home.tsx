@@ -1,5 +1,7 @@
 import { analytics } from '../../firebase';
+
 import { FunctionalComponent, h } from 'preact';
+import { useContext } from 'preact/hooks';
 
 import styles from './Home.scss';
 
@@ -9,16 +11,14 @@ import {
   ThemeSelector,
   VerticalSeparator
 } from '../../lib/components';
-
 // The state-indipendent Typography component.
 import { Typography } from '../../lib/components/Typography';
 
-import { store } from '../../lib/store';
+import { DurationContext } from '../../lib/state';
 import { THEMES } from '../../lib/themes';
 
-import { route } from 'preact-router';
-
 import { enter_fullscreen } from '../../lib/fullscreen';
+import { route } from 'preact-router';
 
 const Home: FunctionalComponent = () => (
   <div class={styles.wrapper}>
@@ -37,7 +37,7 @@ const Home: FunctionalComponent = () => (
     <Button
       on_click={(): void => {
         analytics.logEvent('timer_started', {
-          duration: store.getState().duration
+          duration: useContext(DurationContext)[0]
         });
         enter_fullscreen();
         route('/timer');

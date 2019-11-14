@@ -1,10 +1,10 @@
 import { FunctionalComponent, h, Ref } from 'preact';
-import { useSelector } from 'react-redux';
+import { useContext } from 'preact/hooks';
 
 import CountDown from './CountDown';
 
-import { AppState } from '../../store';
-import { ThemeName, THEMES } from '../../themes';
+import { ThemeContext } from '../../state';
+import { THEMES } from '../../themes';
 
 /**
  * Props for {@link CountDownConnected}.
@@ -42,7 +42,7 @@ const CountDownConnected: FunctionalComponent<CountDownConnectedProps> = ({
   <CountDown
     duration={duration}
     on_complete={on_complete}
-    theme={THEMES[useSelector<AppState, ThemeName>((state) => state.theme)]}
+    theme={THEMES[useContext(ThemeContext)[0]]}
     ref={countdown_ref}
   />
 );
