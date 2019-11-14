@@ -20,12 +20,12 @@ interface ThemeSelectorProps<ThemeNames extends string> {
   label: string;
   themes: { [theme_name in ThemeNames]: [string, string, string] };
   /**
-   * The name of the initially selected theme, presumably from local/session
+   * The index of the initially selected theme, presumably from local/session
    * storage or the user's preferred theme.
    *
    * @memberof ThemeSelectorProps
    */
-  default_theme_name: ThemeNames;
+  default_theme: ThemeNames;
   /**
    * Function to run whenever a new theme is selected.
    *
@@ -42,10 +42,10 @@ interface ThemeSelectorProps<ThemeNames extends string> {
 const ThemeSelector = <ThemeNames extends string>({
   label,
   themes,
-  default_theme_name,
+  default_theme,
   on_update
 }: ThemeSelectorProps<ThemeNames>): h.JSX.Element => {
-  const [theme, set_theme_internal] = useState(default_theme_name);
+  const [theme, set_theme_internal] = useState(default_theme);
 
   /**
    * The function to run when setting a theme. It runs the appropriate

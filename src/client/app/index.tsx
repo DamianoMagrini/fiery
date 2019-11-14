@@ -1,32 +1,24 @@
 import { FunctionalComponent, h } from 'preact';
-import { useContext, useEffect } from 'preact/hooks';
+import { Provider, useSelector } from 'react-redux';
 
 import { Router } from 'preact-router';
-import { StateProvider } from '../lib/state';
 
 import { Home, Timer, GivenUp, Finished } from './routes';
 
-import { ThemeContext } from '../lib/state';
-import { save_state } from '../lib/state/storage';
+import { store, AppState } from '../lib/store';
 
-import { THEME_TUPLE_INDICES, THEMES } from '../lib/themes';
+import { ThemeName, THEME_TUPLE_INDICES, THEMES } from '../lib/themes';
 
 const RootStyle: FunctionalComponent = () => (
   <style>{`#root {background: ${
-    THEMES[useContext(ThemeContext)[0]][THEME_TUPLE_INDICES.BACKGROUND]
+    THEMES[useSelector<AppState, ThemeName>((state) => state.theme)][
+      THEME_TUPLE_INDICES.BACKGROUND
+    ]
   };}`}</style>
 );
 
-const SaveTheme = (): null => {
-  const [theme] = useContext(ThemeContext);
-  useEffect(() => {
-    save_state({ theme });
-  }, [theme]);
-  return null;
-};
-
 const App: FunctionalComponent = () => (
-  <StateProvider>
+  <Provider store={store}>
     <Router>
       <Home default />
       <Timer path={'/timer'} />
@@ -35,8 +27,7 @@ const App: FunctionalComponent = () => (
     </Router>
 
     <RootStyle />
-    <SaveTheme />
-  </StateProvider>
+  </Provider>
 );
 
 export default App;
