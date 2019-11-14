@@ -1,21 +1,21 @@
 import { analytics } from '../../firebase';
-
 import { createRef, FunctionalComponent, h } from 'preact';
-import { useContext } from 'preact/hooks';
 
 import styles from './Timer.scss';
 
-import { DurationContext, set_duration } from '../../lib/state';
-
 import { Button, CountDown as CountDownConnected } from '../../lib/components';
 import { CountDown } from '../../lib/components/CountDown';
+import { useSelector } from 'react-redux';
+import { AppState, store } from '../../lib/store';
+
+import { route } from 'preact-router';
 
 import { exit_fullscreen } from '../../lib/fullscreen';
-import { route } from 'preact-router';
+import { set_timer } from '../../lib/store/actions';
 import { to_ms } from '../../lib/time';
 
 const Timer: FunctionalComponent = () => {
-  const [duration, dispatch_duration] = useContext(DurationContext);
+  const duration = useSelector<AppState, number>((state) => state.duration);
 
   const countdown_ref = createRef<CountDown>();
 
@@ -27,7 +27,7 @@ const Timer: FunctionalComponent = () => {
         on_complete={(): void => {
           analytics.logEvent('timer_completed', { duration });
           exit_fullscreen();
-          dispatch_duration(set_duration(to_ms({ minutes: 30 })));
+          store.dispatch(set_timer(to_ms({ minutes: 30 })));
           route('/finished');
         }}
       />
@@ -37,7 +37,7 @@ const Timer: FunctionalComponent = () => {
           const { time_remaining } = countdown_ref.current;
           analytics.logEvent('timer_canceled', { time_remaining, duration });
           exit_fullscreen();
-          dispatch_duration(set_duration(time_remaining));
+          store.dispatch(set_timer(time_remaining));
           route('/given-up');
         }}
         variant={'outlined'}>

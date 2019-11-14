@@ -1,10 +1,11 @@
 import { FunctionalComponent, h } from 'preact';
-import { useContext } from 'preact/hooks';
+import { useSelector } from 'react-redux';
 
 import DurationInput from './DurationInput';
 
-import { DurationContext, set_duration, ThemeContext } from '../../state';
-import { THEMES } from '../../themes';
+import { store, AppState } from '../../store';
+import { set_timer } from '../../store/actions';
+import { ThemeName, THEMES } from '../../themes';
 
 /**
  * Props for {@link DurationInputConnected}.
@@ -20,16 +21,16 @@ interface DurationInputConnectedProps {
   label: string;
 }
 
-const DurationInputConnected: FunctionalComponent<DurationInputConnectedProps> = ({
-  label
-}) => (
+const DurationInputConnected: FunctionalComponent<
+  DurationInputConnectedProps
+> = ({ label }) => (
   <DurationInput
     label={label}
-    theme={THEMES[useContext(ThemeContext)[0]]}
+    theme={THEMES[useSelector<AppState, ThemeName>((state) => state.theme)]}
     update_duration={(new_duration): void => {
-      useContext(DurationContext)[1](set_duration(new_duration));
+      store.dispatch(set_timer(new_duration));
     }}
-    initial_duration={useContext(DurationContext)[0]}
+    initial_duration={useSelector<AppState, number>((state) => state.duration)}
   />
 );
 

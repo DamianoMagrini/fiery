@@ -1,10 +1,10 @@
 import { ComponentChildren, FunctionalComponent, h } from 'preact';
-import { useContext } from 'preact/hooks';
+import { useSelector } from 'react-redux';
 
+import { AppState } from '../../store';
+
+import { ThemeName, THEMES } from '../../themes';
 import Typography from './Typography';
-
-import { ThemeContext } from '../../state';
-import { THEMES } from '../../themes';
 
 /**
  * Props for {@link TypographyConnected}
@@ -40,7 +40,7 @@ const TypographyConnected: FunctionalComponent<TypographyConnectedProps> = ({
   <Typography
     variant={variant}
     inline={inline}
-    theme={THEMES[useContext(ThemeContext)[0]]}>
+    theme={THEMES[useSelector<AppState, ThemeName>((state) => state.theme)]}>
     {children}
   </Typography>
 );

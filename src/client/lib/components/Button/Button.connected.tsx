@@ -1,10 +1,10 @@
 import { FunctionalComponent, h } from 'preact';
-import { useContext } from 'preact/hooks';
+import { useSelector } from 'react-redux';
 
 import Button from './Button';
 
-import { ThemeContext } from '../../state';
-import { THEMES } from '../../themes';
+import { AppState } from '../../store';
+import { THEMES, ThemeName } from '../../themes';
 
 /**
  * Props for {@link ButtonConnected}.
@@ -44,7 +44,7 @@ const ButtonConnected: FunctionalComponent<ButtonConnectedProps> = ({
   <Button
     on_click={on_click}
     variant={variant}
-    theme={THEMES[useContext(ThemeContext)[0]]}>
+    theme={THEMES[useSelector<AppState, ThemeName>((state) => state.theme)]}>
     {children}
   </Button>
 );
