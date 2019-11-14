@@ -1,13 +1,12 @@
 import { analytics } from '../../../firebase';
 
 import { FunctionalComponent, h } from 'preact';
-import { useSelector } from 'react-redux';
+import { useContext } from 'preact/hooks';
 
 import ThemeSelector from './ThemeSelector';
 
-import { store, AppState } from '../../store';
-import { set_theme } from '../../store/actions';
-import { ThemeName, THEMES } from '../../themes';
+import { set_theme, ThemeContext } from '../../state';
+import { THEMES } from '../../themes';
 
 /**
  * Props for {@link ThemeSelectorConnected}.
@@ -28,15 +27,15 @@ interface ThemeSelectorConnectedProps {
  * that it does not contain the logic to change the app's theme, but will run
  * the specified callbacks instead.
  */
-const ThemeSelectorConnected: FunctionalComponent<
-  ThemeSelectorConnectedProps
-> = ({ label }) => (
+const ThemeSelectorConnected: FunctionalComponent<ThemeSelectorConnectedProps> = ({
+  label
+}) => (
   <ThemeSelector
     label={label}
     themes={THEMES}
-    default_theme={useSelector<AppState, ThemeName>((state) => state.theme)}
+    default_theme_name={useContext(ThemeContext)[0]}
     on_update={(new_theme): void => {
-      store.dispatch(set_theme(new_theme));
+      useContext(ThemeContext)[1](set_theme(new_theme));
       analytics.setUserProperties({ theme: new_theme });
     }}
   />
